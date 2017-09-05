@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Local Weather</title>
+    <link rel="stylesheet" href="css/weather-icons.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto');
+        @import url('https://fonts.googleapis.com/css?family=Libre+Barcode+39+Text|Roboto');
+
+        html,
+        body {
+
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            /* height: 100%; */
+            box-sizing: border-box;
+        }
+
+        body {
+
+            background-color: #F2F2F2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            line-height: normal;
+        }
+
+        p,
+        h2 {
+            margin: 0;
+        }
+
+        .title {
+            font-size: 54px;
+            margin: 0;
+        }
+
+        .details {
+            width: 482px;
+            height: 429px;
+            background: #E0E0E0;
+            border-radius: 7px;
+            box-sizing: border-box;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .location {
+            font-size: 52px;
+        }
+
+        .temp {
+            font-size: 54px;
+        }
+
+        .degree {
+            color: blue;
+            font-size: 54px;
+            cursor: pointer;
+        }
+
+        .degree:hover {
+            color: yellow;
+        }
+
+        .forcast {
+            font-size: 22px;
+        }
+
+        .description {
+            font-size: 18px;
+        }
+
+        .icon i {
+            font-size: 64px;
+            margin-bottom: 5px;
+        }
+
+        footer {
+            /* position: absolute;
+            bottom: 0; */
+            font-size: 40px;
+            padding: 5px;
+            font-family: 'Libre Barcode 39 Text', cursive;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: darkorchid;
+        }
+    </style>
+
+</head>
+
+<body>
+    <img src="icon.svg" alt="" width="100px" height="80px">
+    <h2 class="title">Weather Info</h2>
+    <div class="details">
+        <div style="font-size:18px;">LOCATION</div>
+        <p class="location"></p>
+        <div><span class="temp"></span><span class="degree">°C</span></div>
+        <div class="icon"><i></i></div>
+        <div class="forcast"></div>
+        <div class="description"></div>
+    </div>
+    <footer> by <a href="https://twitter.com/todywa">Tolu Yussuff</a></footer>
+    <script>
+        $(document).ready(function () {
+
+            var url = "https://fcc-weather-api.glitch.me/api/current?";
+            var celcius = true;
+            var status = {
+                200: "wi wi-owm-200",
+                201: "wi wi-owm-201",
+                202: "wi wi-owm-202",
+                210: "wi wi-owm-210",
+                211: "wi wi-owm-211",
+                212: "wi wi-owm-212",
+                221: "wi wi-owm-221",
+                230: "wi wi-owm-230",
+                231: "wi wi-owm-231",
+                232: "wi wi-owm-232",
+                300: "wi wi-owm-300",
+                301: "wi wi-owm-301",
+                302: "wi wi-owm-302",
+                310: "wi wi-owm-310",
+                311: "wi wi-owm-311",
+                312: "wi wi-owm-312",
+                313: "wi wi-owm-313",
+                314: "wi wi-owm-314",
+                321: "wi wi-owm-321",
+                500: "wi wi-owm-500",
+                501: "wi wi-owm-501",
+                502: "wi wi-owm-502",
+                503: "wi wi-owm-503",
+                504: "wi wi-owm-504",
+                511: "wi wi-owm-511",
+                520: "wi wi-owm-520",
+                521: "wi wi-owm-521",
+                522: "wi wi-owm-522",
+                531: "wi wi-owm-531",
+                600: "wi wi-owm-600",
+                601: "wi wi-owm-601",
+                602: "wi wi-owm-602",
+                611: "wi wi-owm-611",
+                612: "wi wi-owm-612",
+                615: "wi wi-owm-615",
+                616: "wi wi-owm-616",
+                620: "wi wi-owm-620",
+                621: "wi wi-owm-621",
+                622: "wi wi-owm-622",
+                701: "wi wi-owm-701",
+                711: "wi wi-owm-711",
+                721: "wi wi-owm-721",
+                731: "wi wi-owm-731",
+                741: "wi wi-owm-741",
+                761: "wi wi-owm-761",
+                762: "wi wi-owm-762",
+                771: "wi wi-owm-771",
+                781: "wi wi-owm-781",
+                800: "wi wi-owm-800",
+                801: "wi wi-owm-801",
+                802: "wi wi-owm-802",
+                803: "wi wi-owm-803",
+                804: "wi wi-owm-804",
+                900: "wi wi-owm-900",
+                901: "wi wi-owm-901",
+                902: "wi wi-owm-902",
+                903: "wi wi-owm-903",
+                904: "wi wi-owm-904",
+                905: "wi wi-owm-905",
+                957: "wi wi-owm-957"
+            }
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    url += "lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
+
+                    $.getJSON(url, function (data) {
+                        $(".location").text(data.name + ", " + data.sys.country);
+                        $(".forcast").text(data.weather[0].main);
+                        cVal = data.main.temp;
+                        $(".temp").text(cVal);
+                        icon = data.weather[0].id;
+                        $('.icon i').attr("class", status[icon]);
+                        $(".description").text(data.weather[0].description);
+                        $(".degree").on("click", {
+                            celcius: cVal
+                        }, toFahrenheit);
+                    });
+
+                });
+
+
+            }
+
+            function toFahrenheit(c) {
+                if (celcius) {
+                    var c1 = parseInt(c.data.celcius);
+                    var f = (c1 * 1.8) + 32;
+                    f = (Math.round(f*10)/10).toFixed(1);
+                    $(".temp").text(f);
+                    $(".degree").text("°F")
+                    celcius = false;
+                } else {
+                    $(".temp").text(cVal);
+                    $(".degree").text("°C");
+                    celcius = true;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
