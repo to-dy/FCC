@@ -2,216 +2,98 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>Wikipedia Viewer</title>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
         crossorigin="anonymous">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Oxygen');
-        body {
-            font-family: 'Oxygen', sans-serif;
-        }
+    <link rel="stylesheet" href="css/style.css">
 
-        .logo img {
-            padding-top: 25%;
-            width: 300px;
-        }
 
-        .search {
-            padding-top: 50px;
-            width: 500px;
-        }
-
-        .search input {
-            border-top-left-radius: 50px;
-            border-bottom-left-radius: 50px;
-        }
-
-        .search button {
-            border-bottom-right-radius: 50px;
-            border-top-right-radius: 50px;
-            background-color: #5D9DF3;
-            cursor: pointer;
-        }
-
-        .search button:hover {
-            background-color: orange;
-        }
-
-        .search-results ul {
-            width: 1000px;
-        }
-
-        .search-results li {
-            padding: 0 0 15px 0;
-            border-bottom: 0.25px solid rgba(79, 79, 79, 0.73);
-            align-items: center;
-        }
-
-        .search-results li:hover {
-            border-left: 2.5px solid #2F80ED;
-            padding-left: 7px;
-        }
-
-        .search-results h5 {
-            font-style: normal;
-            font-weight: bold;
-            line-height: normal;
-            font-size: 22px;
-
-            color: #2F80ED;
-        }
-
-        .search-results img {
-            width: 150px;
-            margin-left: 15px;
-            max-height: 150px;
-        }
-
-        .search-results .media-body {
-            font-style: normal;
-            font-weight: normal;
-            line-height: normal;
-            /* text-align: justify; */
-            font-size: 14px;
-        }
-        .search-results li:not(:first-child) {
-            padding-top: 15px;
-        }
-
-        @media only screen and (max-width: 600px) {
-            .logo img {
-                width: 250px;
-            }
-
-            .search {
-                width: 300px;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="header">
+
+
         <div class="row justify-content-center">
 
-            <div class="logo">
-                <img src="img/Logo.svg" class="img-fluid" alt="">
+
+            <div class="logo" id="logo">
+
+                <img src="img/logo.svg" class="img-fluid" alt="">
+
             </div>
-        </div>
-        <div class="row justify-content-center">
 
-            <div class="input-group search">
-                <input type="text" class="form-control" placeholder="Search for...">
+
+        </div>
+
+
+        <div class="row justify-content-center flex-column align-items-center">
+
+
+            <div class="input-group search" id="search">
+
+                <input type="text" class="form-control" placeholder="Search for..." id="searchText" onkeypress="keypress(event)">
+
                 <span class="input-group-btn">
-                    <button class="btn btn-secondary" type="button"><i class="fa fa-search" style="color: white;"></i></button>
+
+                    <button class="btn btn-secondary" type="button" onclick="makeRequest()">
+
+                        <i class="fa fa-search" style="color: white;"></i>
+
+                    </button>
+
                 </span>
+
             </div>
+
+
+            <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank" class="random">Random article
+                <i class="fa fa-question-circle" aria-hidden="true" style="color: orange"></i>
+            </a>
+
+
         </div>
+
 
     </div>
+
+
     <div class="container search-results">
 
+
         <div class="row justify-content-center">
+
+
             <ul class="list-unstyled" id="list">
-                <!-- <li class="media">
 
-                    <div class="media-body">
-                        <a href="">
-                            <h5 class="mt-0 mb-1">List-based media object</h5>
-                        </a>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                        vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia
-                        congue felis in faucibus.
-                    </div>
-                    <img class="d-flex mr-3" src="img/Logo.svg" alt="Generic placeholder image">
-                </li>
-
-                <li class="media">
-                    <div class="media-body">
-                        <a href="">
-                            <h5 class="mt-0 mb-1">List-based media object</h5>
-                        </a>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                        vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia
-                        congue felis in faucibus.
-                    </div>
-                </li> -->
+                <!-- search results go here -->
 
             </ul>
+
+
         </div>
+
+
     </div>
 
 
+    <footer>
+        Made with ♥ by
+        <a href="https://twitter.com/todywa" target="_blank">Tody</a>
+    </footer>
 
 
-    <script>
-        function getJSON(url, callback) {
-            var xhr = new XMLHttpRequest();
-            xhr.responseType = 'json';
-            xhr.onload = function () {
-                var status = xhr.status;
-                // console.log(status);
-                if (status === 200) {
-                    callback(status, xhr.response);
-                } else {
-                    callback(status, xhr.response);
-                }
-            };
-
-            xhr.open('GET', url, true);
-            // xhr.setRequestHeader( 'Api-User-Agent', 'Example/1.0' );
-            xhr.send();
-
-        };
-
-        var searchText = encodeURI("Fc Barcelona");
-
-        getJSON(
-            'https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrprop=snippet&format=json&formatversion=2&prop=pageimages|extracts|info&inprop=url&gsrlimit=15&exintro=true&explaintext=true&exsentences=1&exlimit=max&piprop=thumbnail&pithumbsize=200&gsrsearch=' +
-            searchText,
-            function (status, data) {
-                if (status != null) {
-                    // var d = JSON.stringify(data);
-                    var result = data.query.pages;
-                    for (var i = 0; i < result.length; i++) {
-                        var sdata =
-                            '<li class="media">' +
-                            '<div class="media-body">' +
-                            '<a href="'+ result[i].fullurl + '">' +
-                                '<h5 class="mt-0 mb-1">'+ result[i].title + '</h5>'+
-                            '</a>'+
-                                result[i].extract + 
-                            '</div>';
-
-                        if ('thumbnail' in result[i]) {
-                            sdata += '<img class="d-flex mr-3" src="' + result[i].thumbnail["source"] + '">' +
-                                '</li>';
-                        } else {
-                            sdata +='</li>';
-                        }
-
-                        document.getElementById('list').innerHTML += sdata;
-                    }
-
-                    // document.getElementById('data').innerHTML = JSON.stringify(data.query.pages);
-                } else {
-                    alert("Error getting data, code: " + status);
-                }
-            }
-        );
-    </script>
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
-        crossorigin="anonymous"></script>
+    <script src="js/request.js"></script>
 
 
 </body>
