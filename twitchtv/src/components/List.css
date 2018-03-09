@@ -1,0 +1,163 @@
+.List_Container {
+    position: relative;
+    display: flex;
+    width: 80%;
+    padding: 10px 10px;
+    min-height: 75px
+}
+
+.List_Container.online {
+    border-bottom: 1px solid #29CB42;
+}
+
+.List_Container.offline {
+    border-bottom: 1px solid #56CCF2;
+}
+
+.Avatar {
+    margin-right: 20px;
+    align-self: center;
+}
+
+.Avatar img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px
+}
+
+.Avatar.offline img {
+    border: 2px solid #56CCF2;
+}
+
+.Avatar.online img {
+    border: 2px solid #29CB42;
+
+}
+
+.Line {
+    display: flex;
+    flex-direction: column;
+}
+
+.Line_H {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Name a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 7px 0;
+}
+
+.Name a:hover {
+    text-decoration: underline
+}
+
+.Info {
+    display: flex;
+    flex: 1;
+    justify-content: flex-start
+}
+
+.Info__ {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.Game {
+    font-weight: 700;
+    font-size: 13px
+}
+
+.Status {
+    font-size: 11px;
+}
+
+/* .Online {} */
+
+.Offline {
+    margin-left: auto
+}
+
+/* @media only screen and (min-width: 768px) { */
+
+@media only screen and (min-width: 1021px) {
+    .List_Container {
+        border-bottom: none;
+    }
+    .List_Container.online {
+        border-bottom: none;
+    }
+    
+    .List_Container.offline {
+        border-bottom: none;
+    }
+    .Avatar {
+        align-self: center
+    }
+    .Avatar img {
+        border: 3px solid #56CCF2;
+        width: 55px;
+        height: 55px
+    }
+    .Line {
+        flex-direction: row;
+        flex: 1;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 0
+    }
+
+    .Line.offline {
+        border-bottom: 1.5px solid #56CCF2;
+    }
+    
+    .Line.online {
+        border-bottom: 1.5px solid #29CB42;
+    }
+    .Line_H {
+        border-bottom: 1.5px solid #56CCF2;
+    }
+    .Name {
+        width: 30%
+    }
+    .Name a {
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        font-size: 17px
+    }
+    .info {
+        width: 70%;
+    }
+    .Info__ {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start
+    }
+    .Game {
+        font-weight: 700;
+        font-size: 15px
+    }
+    .Status {
+        font-size: 13px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .Status:hover {
+        white-space: inherit;
+        text-overflow: inherit;
+    }
+    .Offline {
+        margin: auto
+    }
+}

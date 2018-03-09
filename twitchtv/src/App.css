@@ -1,0 +1,228 @@
+.App {
+  background-color: #0A0A0A;
+  box-shadow: inset -8px -8px 0px rgba(86, 204, 242, 0.25), inset 8px 8px 0px rgba(86, 204, 242, 0.25);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Mina', sans-serif;
+  box-sizing: border-box;
+  color: #E5E5E5;
+}
+
+.Container {
+  position: relative;
+  background: #303030;
+  width: 85vw;
+  max-height: 60vh;
+  height: 60vh;
+  padding: 15px 0;
+}
+
+.List {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 60vh;
+  overflow-y: scroll;
+  margin: auto 0;
+}
+
+.List::-webkit-scrollbar {
+  width: 6px;
+}
+
+.List::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.List::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.Container-nav {
+  position: absolute;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  top: -22px;
+  right: 0px;
+  width: 25vw;
+  height: 22px;
+  background-color: #C4C4C4;
+  border-radius: 10px 10px 0 0;
+  -webkit-clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+  padding-right: 5px
+}
+
+.Title {
+  position: absolute;
+  left: 0;
+  top: -22px;
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #56CCF2;
+}
+
+.nav_c {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px
+}
+
+.nav_c>*:last-child {
+  display: none;
+}
+
+.nav_c.active>*:last-child {
+  display: block;
+}
+
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  align-self: center
+}
+
+.option {
+  margin: 3px 0 0 2.5px;
+  color: #0A0A0A;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.dot.online {
+  background-color: #29CB42;
+}
+
+.dot.offline {
+  background-color: #FF625A;
+}
+
+.dot.all {
+  background-color: #4B367C;
+}
+
+.Footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  padding: 15px;
+}
+
+.Footer a {
+  padding: 0 5px;
+  color: #56CCF2;
+}
+
+@media only screen and (min-width: 768px) {
+  .Container {
+    width: 65vw;
+  }
+  .Container-nav {
+    border-radius: 16px 16px 0 0;
+    width: 15vw;
+    height: 30px;
+    top: -30px;
+    padding-right: 5px
+  }
+  .Title {
+    font-size: 30px;
+    top: -35px;
+    letter-spacing: 0.04em;
+  }
+  .List::-webkit-scrollbar {
+    width: 12px;
+  }
+  .nav_c {
+    display: flex;
+    /* flex: 1; */
+    align-items: center;
+    margin-left: 15px
+  }
+  .nav_c>*:last-child {
+    display: none;
+  }
+  .nav_c.active>*:last-child {
+    display: block;
+  }
+  .dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    align-self: center
+  }
+  .option {
+    margin-left: 3px;
+    color: #0A0A0A;
+    font-size: 12px
+  }
+  .dot.online {
+    background-color: #29CB42;
+  }
+  .dot.offline {
+    background-color: #FF625A;
+  }
+  .dot.all {
+    background-color: #4B367C;
+  }
+}
+
+/* loader */
+
+.lds-facebook {
+  /* display: inline-block; */
+  position: relative;
+  width: 64px;
+  height: 64px;
+  align-self: center;
+  margin: 40px auto
+}
+
+.lds-facebook div {
+  display: inline-block;
+  border-radius: 15px;
+  position: absolute;
+  left: 6px;
+  width: 13px;
+  background: #56CCF2;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.lds-facebook div:nth-child(1) {
+  left: 6px;
+  animation-delay: -0.24s;
+}
+
+.lds-facebook div:nth-child(2) {
+  left: 26px;
+  animation-delay: -0.12s;
+}
+
+.lds-facebook div:nth-child(3) {
+  left: 45px;
+  animation-delay: 0;
+}
+
+@keyframes lds-facebook {
+  0% {
+    top: 6px;
+    height: 51px;
+  }
+  50%,
+  100% {
+    top: 19px;
+    height: 26px;
+  }
+}
